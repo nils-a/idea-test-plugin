@@ -8,12 +8,7 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.nilsa.ideatestplugin.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.nilsa.ideatestplugin.services.MyProjectService"/>
+        <fileType name="Nils" language="Nils" extensions="nils" implementationClass="com.github.nilsa.ideatestplugin.NilsFileType" />
+        <scratch.creationHelper language="Nils" implementationClass="com.github.nilsa.ideatestplugin.NilsScratchFileCreationHelper"/>
     </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.nilsa.ideatestplugin.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
 </idea-plugin>
