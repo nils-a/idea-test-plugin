@@ -1,13 +1,18 @@
 package com.github.nilsa.ideatestplugin
 
+import com.intellij.icons.AllIcons
 import com.intellij.openapi.fileTypes.LanguageFileType
-import com.intellij.openapi.fileTypes.ex.FileTypeIdentifiableByVirtualFile
-import com.intellij.openapi.project.ProjectLocator
-import com.intellij.openapi.vfs.VirtualFile
+import javax.swing.Icon
+
 
 class NilsFileType : LanguageFileType(NilsLanguage) {
     override fun getName() = NilsLanguage.displayName
     override fun getDescription() = "Nils files"
-    override fun getIcon() = null
+    override fun getIcon(): Icon? = AllIcons.Actions.Colors
     override fun getDefaultExtension() = "nils"
+
+    companion object {
+        @JvmField
+        val INSTANCE = NilsFileType()
+    }
 }
