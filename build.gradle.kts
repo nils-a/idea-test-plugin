@@ -18,6 +18,8 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.16.0"
     // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
+    // parser & lexer (i.e. the bnf and the flex file...)
+    id("org.jetbrains.grammarkit") version "2020.3.2"
 }
 
 group = properties("pluginGroup")
@@ -31,6 +33,9 @@ repositories {
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.16.0")
 }
+
+// for generated parser code..
+sourceSets["main"].java.srcDirs("src/main/gen")
 
 // Configure gradle-intellij-plugin plugin.
 // Read more: https://github.com/JetBrains/gradle-intellij-plugin
@@ -65,7 +70,31 @@ detekt {
     }
 }
 
+grammarKit {
+    // version of IntelliJ patched JFlex (see bintray link below), Default is 1.7.0-1
+    //jflexRelease = "1.7.0-1"
+
+    // tag or short commit hash of Grammar-Kit to use (see link below). Default is 2020.3.1
+    grammarKitRelease = "2020.1"
+}
+
 tasks {
+    register<org.jetbrains.grammarkit.tasks.GenerateLexer>("gen-lexer") {
+        dependsOn("gen-parser")
+        this.source = "src/main/java/com/github/nilsa/ideatestplugin/psi/Nils.flex"
+        this.targetDir = "src/main/gen/com/github/nilsa/ideatestplugin/psi/lex"
+        this.targetClass = "NilsLexer"
+        this.purgeOldFiles = true
+    }
+
+    register<org.jetbrains.grammarkit.tasks.GenerateParser>("gen-parser") {
+        this.source = "src/main/java/com/github/nilsa/ideatestplugin/psi/Nils.bnf"
+        this.targetRoot = "src/main/gen"
+        this.pathToParser = "/com/github/nilsa/ideatestplugin/psi/NilsParser.java"
+        this.pathToPsiRoot = "/com/github/nilsa/ideatestplugin/psi/parse"
+        this.purgeOldFiles = true
+    }
+
     // Set the compatibility versions to 1.8
     withType<JavaCompile> {
         sourceCompatibility = "1.8"
@@ -73,6 +102,7 @@ tasks {
     }
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
+        dependsOn("gen-lexer", "gen-parser")
     }
 
     withType<Detekt> {

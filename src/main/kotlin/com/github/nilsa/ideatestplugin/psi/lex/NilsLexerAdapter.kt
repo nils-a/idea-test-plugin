@@ -1,6 +1,5 @@
-package com.github.nilsa.ideatestplugin.psi
+package com.github.nilsa.ideatestplugin.psi.lex
 
 import com.intellij.lexer.FlexAdapter
 
-
-class NilsLexerAdapter : FlexAdapter(com.github.nilsa.ideatestplugin.psi.lex.NilsLexer(null))
+class NilsLexerAdapter : FlexAdapter(NilsLexer(null))

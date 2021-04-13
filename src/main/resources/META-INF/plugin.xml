@@ -10,5 +10,6 @@
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="Nils" language="Nils" extensions="nils" implementationClass="com.github.nilsa.ideatestplugin.NilsFileType" fieldName="INSTANCE" />
         <!-- scratch.creationHelper language="Nils" implementationClass="com.github.nilsa.ideatestplugin.NilsScratchFileCreationHelper"/ -->
+        <lang.parserDefinition language="Nils" implementationClass="com.github.nilsa.ideatestplugin.psi.NilsParserDefinition"/>
     </extensions>
 </idea-plugin>
