@@ -1,4 +1,4 @@
-package com.github.nilsa.ideatestplugin.psi
+package com.github.nilsa.ideatestplugin.psi.parser
 
 import com.github.nilsa.ideatestplugin.NilsLanguage
 import com.intellij.psi.tree.IElementType
