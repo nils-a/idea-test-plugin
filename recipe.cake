@@ -11,7 +11,7 @@ IntelliJBuildParameters.SetParameters(
   repositoryName: "idea-test-plugin",
   repositoryOwner: "nils-a",
   marketplaceId: "15698-test-rider",
-  pluginChannelGradleProperty: "Development",
+  pluginReleaseChannel: "Development",
   preferredBuildProviderType: BuildProviderType.GitHubActions,
   preferredBuildAgentOperatingSystem: PlatformFamily.Linux
 );
