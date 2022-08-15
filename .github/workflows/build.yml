@@ -50,7 +50,7 @@ jobs:
           java-version: '11'
       
       - name: Build project
-        uses: cake-build/cake-action@v1.4.0
+        uses: cake-build/cake-action@v1.4.1
         with:
           script-path: recipe.cake
           target: CI
